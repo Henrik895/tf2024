@@ -68,7 +68,7 @@ def load_data(path):
     return sents
 
 
-def prepare_parallel_dataset(source, target, /, nr_examples = None, tag_enabled = False, tag_token = None, start_from = None):
+def prepare_parallel_dataset(source, target, /, nr_examples = None, tag_enabled = False, tag_token = None):
     """
     Takes two language files and merges them for preprocessing.
 
@@ -84,8 +84,6 @@ def prepare_parallel_dataset(source, target, /, nr_examples = None, tag_enabled 
                      the tag_token symbol.
 
         tag_token: Symbol to use for tagged back-translation.
-
-        start_from: Can be used to skip first n sentences in the language files.
     Returns:
         Parallel Dataset, with attributes "id" and "translations" with source and target language sentences. 
         {"id": [1], "translations": [{"est_Latn": "Test", "vep_Latn": "test"}]}
@@ -99,10 +97,6 @@ def prepare_parallel_dataset(source, target, /, nr_examples = None, tag_enabled 
 
     source_sents = load_data(source_path)
     target_sents = load_data(target_path)
-
-    if start_from is not None:
-        source_sents = source_sents[start_from:]
-        target_sents = target_sents[start_from:]
 
     if nr_examples is not None:
         combined = list(zip(source_sents, target_sents))
@@ -329,8 +323,7 @@ class LanguagePair(LanguageLoader):
         # Prepare datasets for same language translation (denoising)
         if ssl_enabled:
             nr_examples = len(self.parallel) * ssl_ratio
-            start_from = len(self.parallel) * bt_ratio if bt_enabled else None
-            self.mono_src, self.mono_tgt = self.get_mono_data(nr_examples=nr_examples, start_from=start_from)
+            self.mono_src, self.mono_tgt = self.get_mono_data(nr_examples=nr_examples)
 
 
 # Fine-tuning
