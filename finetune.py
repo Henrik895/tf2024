@@ -516,7 +516,7 @@ for epoch in range(EPOCHS):
     lr_log.append(lr_scheduler.get_lr())
 
     if dev_loss < best_loss:
-       model.save_pretrained(repr(best_path))
+       model.save_pretrained(f"{FOLDER_NAME}/best")
        best_loss = dev_loss
 
     print(f"Epoch: {epoch + 1}, train_l: {train_loss}, dev_l: {dev_loss}, dev_bleu: {dev_bleu}, dev_chr: {dev_chr}")
@@ -525,8 +525,8 @@ for epoch in range(EPOCHS):
 last_path = Path(FOLDER_NAME) / 'last'
 last_path.mkdir(parents=True, exist_ok=True)
 
-model.save_pretrained(repr(last_path))
-tokenizer.save_pretrained(repr(last_path))
+model.save_pretrained(f"{FOLDER_NAME}/last")
+tokenizer.save_pretrained(f"{FOLDER_NAME}/last")
 
 
 # Save metrics
