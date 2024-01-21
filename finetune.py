@@ -488,15 +488,15 @@ def test(model, dataloader, tokenizer):
         with torch.no_grad():
             outputs = model(**batch)
 
-    logits = outputs.logits
-    predictions = torch.argmax(logits, dim=-1)
-    predictions = tokenizer.batch_decode(predictions.tolist(), skip_special_tokens=True)
-    labels = [[id if id >= 0 else 1 for id in sent] for sent in batch["labels"].tolist()]
-    labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
+        logits = outputs.logits
+        predictions = torch.argmax(logits, dim=-1)
+        predictions = tokenizer.batch_decode(predictions.tolist(), skip_special_tokens=True)
+        labels = [[id if id >= 0 else 1 for id in sent] for sent in batch["labels"].tolist()]
+        labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
 
-    total_loss += outputs.loss.item()
-    total_bleu += sacrebleu.corpus_bleu(predictions, [labels]).score
-    total_chr += sacrebleu.corpus_chrf(predictions, [labels], word_order = 2).score
+        total_loss += outputs.loss.item()
+        total_bleu += sacrebleu.corpus_bleu(predictions, [labels]).score
+        total_chr += sacrebleu.corpus_chrf(predictions, [labels], word_order = 2).score
 
     return total_loss / len(dataloader), total_bleu / len(dataloader), total_chr / len(dataloader)
 
