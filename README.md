@@ -1,7 +1,7 @@
 # Machine translation for low resource Finno-Ugric languages
 ## Overview
 Transformers 23/24 course project. The goal is to compare tagged back-translation to the regular back-translation. In addition to back-translation, SSL denoising task is also tested.  
-The results are measured using BLEU and chrFr++.
+The results are measured using BLEU and chrF++.
 
 Included low-resource Finno-Ugric languages:
 - Veps (Latin)
