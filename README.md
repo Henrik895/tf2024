@@ -19,16 +19,18 @@ The structure of the `vep` folder should be:
 
 ```
 vep
-│   est_Latn-vep_Latn.est_Latn (these language files are translated, which means that the target side is synthetic. Can be used for back-translation and source side for monolingual data)
+│   est_Latn-vep_Latn.est_Latn
 │   est_Latn-vep_Latn.vep_Latn
 |   vep_Latn-est_Latn.vep_Latn
 |   vep_Latn-est_Latn.est_Latn   
 │
-└───parallel (real examples, no synthetic data)
+└───parallel
 │   │   est_Latn-vep_Latn.est_Latn
 │   │   est_Latn-vep_Latn.vep_Latn
 │   │
 ```
+
+⚠️ Parallel folder should include "real" parallel senteneces, which means that neither side is machine translated. The base language folder, which has 4 files, should include translated data pairs where one side is synthetic.
 
 ## Fine-tuning
 
