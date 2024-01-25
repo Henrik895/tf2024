@@ -38,6 +38,6 @@ If the data is present, then the fine-tuning should work by just running the `fi
 
 ## What about the results?
 
-![Could be better...](https://media3.giphy.com/media/BUT4SHFnAg7rzBu2Ke/giphy.gif)
+The tagged back-translation and SSL help when evaluated on the test set (90/10), split done on the data before training, but the not on the FLORES benchmark. Most likely cause is the domain set as the sentences in the FLORES benchmark are very different compared to the training data.
 
 
